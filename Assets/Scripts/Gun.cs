@@ -9,11 +9,11 @@ public class Gun : MonoBehaviour
 
     void fireBullet()
     {
-        // 1
+        // create a new bullet object from the prefab
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
-        // 2
+        // placeing the bullet at the Launcher position
         bullet.transform.position = launchPosition.position;
-        // 3
+        // 
         bullet.GetComponent<Rigidbody>().velocity =
         transform.parent.forward * 100;
     }
