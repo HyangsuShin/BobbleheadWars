@@ -925,6 +925,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 464275612}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &474052675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 474052677}
+  - component: {fileID: 474052676}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &474052676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474052675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08ca4d4e2b9089418cc41bfa8dbb48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 871793202}
+  spawnPoints:
+  - {fileID: 1413850649}
+  - {fileID: 1532082364}
+  - {fileID: 782894987}
+  - {fileID: 802255724}
+  - {fileID: 1193875025}
+  - {fileID: 355206230}
+  - {fileID: 883338118}
+  - {fileID: 582567221}
+  - {fileID: 363397109}
+  - {fileID: 1824105046}
+  - {fileID: 475089687}
+  alien: {fileID: 1648098496609917153, guid: bdabe26c3e8ef154c90d55c5b2dc46ac, type: 3}
+  maxAliensOnScreen: 10
+  totalAliens: 10
+  minSpawnTime: 0
+  maxSpawnTime: 3
+  aliensPerSpawn: 1
+--- !u!4 &474052677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474052675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.5710444, y: 19.07, z: 6.895214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475089687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 50
   head: {fileID: 651190959}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!143 &871793206
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1683,6 +1749,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: 7f78b096b427d419f9918e4ae4fc4aec, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7f78b096b427d419f9918e4ae4fc4aec, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2123,16 +2193,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3837124685235086460
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3837124685235086457}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.52
-  m_Center: {x: 0.34, y: 2.54, z: 0.57}
