@@ -355,6 +355,7 @@
 "Assets/Scripts/Projectile.cs"
 "Assets/Scripts/Rotator.cs"
 "Assets/SoundManager.cs"
+"Assets/Upgrade.cs"
 -langversion:9.0
 
 /deterministic
