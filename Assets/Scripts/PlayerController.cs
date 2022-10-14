@@ -12,6 +12,13 @@ public class PlayerController : MonoBehaviour
 
     public Animator bodyAnimator;
 
+    public float[] hitForce; //force value of camera
+
+    public float timeBetweenHits = 2.5f;//the grace period after the hero sustains damage
+    private bool isHit = false;         //a flag that indicates the hero took a hit
+    private float timeSinceHit = 0;     //the amount of time in the grace period
+    private int hitNumber = -1;         //the number of times the hero took a hit
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +35,16 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"),
         0, Input.GetAxis("Vertical"));
         characterController.SimpleMove(moveDirection * moveSpeed);
+
+        if (isHit)
+        {
+            timeSinceHit += Time.deltaTime;
+            if(timeSinceHit > timeBetweenHits)
+            {
+                isHit = false;
+                timeSinceHit = 0;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -67,6 +84,31 @@ public class PlayerController : MonoBehaviour
             // 3
             transform.rotation = Quaternion.Lerp(transform.rotation,
             rotation, Time.deltaTime * 10.0f);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Alien alien = other.gameObject.GetComponent<Alien>(); //check if the colliding object has an Alien script
+        if(alien != null)
+        {
+            if(!isHit)
+            {
+                hitNumber += 1;
+                CameraShake cameraShake = Camera.main.GetComponent<CameraShake>();
+                if(hitNumber < hitForce.Length) //still alive
+                {
+                    cameraShake.intensity = hitForce[hitNumber];
+                    cameraShake.Shake();
+                }
+                else
+                {
+                    //death todo
+                }
+                isHit = true;
+                SoundManager.Instance.PlayOneShot(SoundManager.Instance.hurt);
+            }
+            alien.Die();
         }
     }
 }
