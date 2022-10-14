@@ -14,10 +14,15 @@ public class PlayerController : MonoBehaviour
 
     public float[] hitForce; //force value of camera
 
+    // Killing the hero
     public float timeBetweenHits = 2.5f;//the grace period after the hero sustains damage
     private bool isHit = false;         //a flag that indicates the hero took a hit
     private float timeSinceHit = 0;     //the amount of time in the grace period
     private int hitNumber = -1;         //the number of times the hero took a hit
+
+    // Removeing the bubble head
+    public Rigidbody marineBody;
+    private bool isDead = false;    //Death State
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +92,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Killing Hero
     void OnTriggerEnter(Collider other)
     {
         Alien alien = other.gameObject.GetComponent<Alien>(); //check if the colliding object has an Alien script
@@ -103,12 +109,31 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    //death todo
+                    Die();
                 }
                 isHit = true;
                 SoundManager.Instance.PlayOneShot(SoundManager.Instance.hurt);
             }
             alien.Die();
         }
+    }
+
+    //Remove the bubblehead
+    public void Die()
+    {
+        bodyAnimator.SetBool("IsMoving", false);
+        marineBody.transform.parent = null;
+        marineBody.isKinematic = false;
+        marineBody.useGravity = true;
+        marineBody.gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        marineBody.gameObject.GetComponent<Gun>().enabled = false;
+
+        //disconnect hinge
+        Destroy(head.gameObject.GetComponent<HingeJoint>());
+        head.transform.parent = null;
+        head.useGravity = true;
+        SoundManager.Instance.PlayOneShot(SoundManager.Instance.marineDeath);
+        Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
