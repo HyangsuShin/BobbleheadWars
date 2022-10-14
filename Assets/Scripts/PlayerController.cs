@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    isDead = true;
                     Die();
                 }
                 isHit = true;
