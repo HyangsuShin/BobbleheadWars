@@ -24,10 +24,14 @@ public class PlayerController : MonoBehaviour
     public Rigidbody marineBody;
     private bool isDead = false;    //Death State
 
+    //ch.8
+    private DeathParticles deathParticles;
+
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        deathParticles = gameObject.GetComponentInChildren<DeathParticles>(); //ch.8
     }
 
     // Update is called once per frame
@@ -133,7 +137,9 @@ public class PlayerController : MonoBehaviour
         head.transform.parent = null;
         head.useGravity = true;
         SoundManager.Instance.PlayOneShot(SoundManager.Instance.marineDeath);
-        Destroy(gameObject);
+
+        deathParticles.Activate();
+
         Destroy(gameObject);
     }
 }
